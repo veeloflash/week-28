@@ -47,7 +47,7 @@ def run(data, output, backend):
     embedder = make_embedder(sources, backend)
     output.mkdir(parents=True, exist_ok=True)
 
-    # Same chunk size, varying only overlap (three nonzero/zero values plus baseline).
+    # Overlap cost audit: same 32-word chunk size; only overlap changes.
     overlap_rows = []
     for overlap in (0, 8, 16, 24):
         index = Index(sources, ChunkConfig("fixed", 32, overlap), embedder)
@@ -67,7 +67,7 @@ def run(data, output, backend):
                  for r in overlap_rows)
     (output / "overlap_cost_audit.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    # Dedicated 12–15-question lab, independent of the existing dev/test sets.
+    # Dedicated 12–15-question lab; separate from existing dev/test questions.
     boundary_sources = load_sources(data / "chunk_boundary")
     boundary_cases = load_queries(data / "chunk_boundary_queries.json", boundary_sources)
     if not 12 <= len(boundary_cases) <= 15:
@@ -76,6 +76,7 @@ def run(data, output, backend):
         "fixed32_overlap0": ChunkConfig("fixed", 32, 0),
         "fixed32_overlap8": ChunkConfig("fixed", 32, 8),
         "fixed32_overlap16": ChunkConfig("fixed", 32, 16),
+        "fixed32_overlap24": ChunkConfig("fixed", 32, 24),
         "sections": CHUNK_CONFIGS["sections"],
     }
     boundary_rows = []
@@ -83,10 +84,11 @@ def run(data, output, backend):
         index = Index(boundary_sources, config, embedder)
         for case in boundary_cases:
             row = measure(index, [case], STAGES["R0"])[0]
-            boundary_rows.append({"config": name, "query_id": case["id"], "category": case["category"],
-                                  "query": case["query"], "recall_at_5": row["recall_at_5"],
-                                  "mrr_at_5": row["rr_at_5"], "error": row["error"],
-                                  "chunk_count": len(index.chunks), "context_tokens": row["context_tokens"]})
+            boundary_rows.append({"config": name, "query_id": case["id"],
+                                  "category": case["category"], "query": case["query"],
+                                  "recall_at_5": row["recall_at_5"], "mrr_at_5": row["rr_at_5"],
+                                  "error": row["error"], "chunk_count": len(index.chunks),
+                                  "context_tokens": row["context_tokens"]})
     write_csv(output / "chunk_boundary_failure_lab.csv", boundary_rows)
     lines = ["# Chunk Boundary Failure Lab", "", f"Known-evidence questions: {len(boundary_cases)}.", "",
              "| Config | Query | Category | Recall@5 | MRR@5 | Error |", "|---|---|---|---:|---:|---|"]
@@ -94,24 +96,29 @@ def run(data, output, backend):
                  f"{r['mrr_at_5']} | {r['error']} |" for r in boundary_rows)
     (output / "chunk_boundary_failure_lab.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
+    # Per-query retriever rescues. Unanswerable questions are not called misses.
     index = Index(sources, CHUNK_CONFIGS["sections"], embedder)
     rescue_rows = []
     for case in test:
         outcomes = {method: measure(index, [case], {**STAGES["R1"], "method": method})[0]
                     for method in ("sparse", "dense", "hybrid")}
-        sparse_ok = outcomes["sparse"]["complete"] is True
-        dense_ok = outcomes["dense"]["complete"] is True
-        hybrid_ok = outcomes["hybrid"]["complete"] is True
-        if sparse_ok and not dense_ok:
-            interpretation = "Sparse-only success: lexical/BM25 rescues dense miss"
-        elif dense_ok and not sparse_ok:
-            interpretation = "Dense-only success: semantic retrieval rescues sparse miss"
-        elif not sparse_ok and not dense_ok and hybrid_ok:
-            interpretation = "Hybrid rescues both individual retrievers"
-        elif not hybrid_ok:
-            interpretation = "Hybrid still misses at least one labelled evidence span"
+        if not case["spans"]:
+            interpretation = "Unanswerable: abstention is expected; excluded from rescue/miss counts"
+            sparse_ok = dense_ok = hybrid_ok = None
         else:
-            interpretation = "Both individual retrievers succeed; no exclusive rescue"
+            sparse_ok = outcomes["sparse"]["complete"] is True
+            dense_ok = outcomes["dense"]["complete"] is True
+            hybrid_ok = outcomes["hybrid"]["complete"] is True
+            if sparse_ok and not dense_ok:
+                interpretation = "Sparse-only success: lexical/BM25 rescues dense miss"
+            elif dense_ok and not sparse_ok:
+                interpretation = "Dense-only success: semantic retrieval rescues sparse miss"
+            elif not sparse_ok and not dense_ok and hybrid_ok:
+                interpretation = "Hybrid rescues both individual retrievers"
+            elif not hybrid_ok:
+                interpretation = "Hybrid still misses at least one labelled evidence span"
+            else:
+                interpretation = "Both individual retrievers succeed; no exclusive rescue"
         rescue_rows.append({"query_id": case["id"], "query": case["query"],
                             "sparse_complete": sparse_ok, "dense_complete": dense_ok,
                             "hybrid_complete": hybrid_ok, "interpretation": interpretation})
@@ -120,21 +127,25 @@ def run(data, output, backend):
              "| Query | Sparse | Dense | Hybrid | Interpretation |", "|---|---:|---:|---:|---|"]
     lines.extend(f"| {r['query_id']} — {r['query']} | {r['sparse_complete']} | {r['dense_complete']} | "
                  f"{r['hybrid_complete']} | {r['interpretation']} |" for r in rescue_rows)
-    for title, predicate in (
-        ("Sparse rescues dense", lambda r: r["sparse_complete"] and not r["dense_complete"]),
-        ("Dense rescues sparse", lambda r: r["dense_complete"] and not r["sparse_complete"]),
-        ("Hybrid misses", lambda r: not r["hybrid_complete"]),
-    ):
+    predicates = (
+        ("Sparse rescues dense", lambda r: r["sparse_complete"] is True and r["dense_complete"] is False),
+        ("Dense rescues sparse", lambda r: r["dense_complete"] is True and r["sparse_complete"] is False),
+        ("Hybrid misses answerable evidence", lambda r: r["hybrid_complete"] is False),
+    )
+    for title, predicate in predicates:
         examples = [row["query_id"] for row in rescue_rows if predicate(row)]
         lines += ["", f"{title}: {', '.join(examples) if examples else 'No examples in this held-out set.'"]
     (output / "retriever_rescue_analysis.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
+    # Paired R2/R3 ranks, with candidate-set identity asserted for every query.
     rerank_rows = []
     for case in test:
         before = measure(index, [case], STAGES["R2"])[0]
         after = measure(index, [case], STAGES["R3"])[0]
         if before["retrieval"]["candidates"] != after["retrieval"]["candidates"]:
             raise AssertionError(f"R2/R3 candidate set differs for {case['id']}")
+        if not case["spans"]:
+            continue
         old_rank = next((rank for rank, cid in enumerate(before["retrieval"]["selected"], 1)
                          if cid in before["relevant_chunk_ids"]), None)
         new_rank = next((rank for rank, cid in enumerate(after["retrieval"]["selected"], 1)
@@ -147,7 +158,7 @@ def run(data, output, backend):
     write_csv(output / "reranker_case_analysis.csv", rerank_rows)
     improved = sum(row["change"] == "Improved" for row in rerank_rows)
     degraded = sum(row["change"] == "Degraded" for row in rerank_rows)
-    lines = ["# Reranker Case Analysis", "", "R2/R3 candidate sets were checked for equality per query.", "",
+    lines = ["# Reranker Case Analysis", "", "R2/R3 candidate sets were checked for equality per answerable query.", "",
              f"Measured changed-rank cases: {len(rerank_rows)}; improved: {improved}; degraded: {degraded}.", "",
              "| Query | Before rank | After rank | Change | Why |", "|---|---:|---:|---|---|"]
     lines.extend(f"| {row['query_id']} — {row['query']} | {row['before_rank']} | {row['after_rank']} | "
@@ -158,6 +169,7 @@ def run(data, output, backend):
                   "The automated why field is an inspection cue; it does not claim that a human has completed the required case review."]
     (output / "reranker_case_analysis.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
+    # Conflict lab: trusted same-product sources have equal authority/date/version.
     conflict_dir = data / "conflict_case"
     conflict_sources = load_sources(conflict_dir)
     conflict_index = Index(conflict_sources, CHUNK_CONFIGS["sections"], embedder)
@@ -172,30 +184,32 @@ def run(data, output, backend):
         raise AssertionError("Conflict audit did not return both contradictory trusted citations.")
     (output / "conflict_detection.json").write_text(json.dumps(conflict_report, indent=2), encoding="utf-8")
 
-    # Explicitly label report as a public-requirement-aligned academic prototype,
-    # never as a commissioned engagement. Preserve the existing metric sections.
+    # Update the formal report, preserving baseline data and clearly distinguishing
+    # a public requirement reference from a commissioned client engagement.
     report_path = output / "Retrieval_Optimization_Report.md"
     if report_path.exists():
         report = report_path.read_text(encoding="utf-8")
-        report = re.sub(r"This is a simulated support client\.[^\n]*",
-                        "This is a public-requirement-aligned prototype, not a commissioned client delivery. "
-                        "It references LlamaIndex issue #19370 (created 2025-07-09), a public report about "
-                        "RAG folder filtering leaking unselected paths. The AX-17/AX-18 corpus is synthetic "
-                        "and remains a controlled test fixture; no real client corpus has been validated. "
-                        "See `real_client_requirement.md` for source, requirement summary, client problem, and acceptance criteria.", report)
-        additions = [
+        old = ("This is a simulated support client. Its search has to find the right manual passage even when "
+               "two devices share an error code, or when a customer describes a problem in their own words.")
+        new = ("This is a public-requirement-aligned prototype, not a commissioned client delivery. It references "
+               "LlamaIndex issue #19370 (created 2025-07-09), a public report about RAG folder filtering leaking "
+               "unselected paths. The AX-17/AX-18 corpus is synthetic and remains a controlled test fixture; no real "
+               "client corpus has been validated. See `real_client_requirement.md` for source, requirement summary, "
+               "client problem, and acceptance criteria.")
+        report = report.replace(old, new)
+        sections = [
             ("## Overlap cost audit", "\n\n## Overlap cost audit\n\nSee `overlap_cost_audit.md` and `.csv`; all runs keep chunk size 32 and compare overlap 0, 8, 16, and 24.\n"),
             ("## Chunk boundary failure lab", "\n\n## Chunk boundary failure lab\n\nA separate 12-question labeled fixture measures heading/paragraph, table header/row, code/explanation, multi-fact, long-section, overlap-rescue, and section-aware cases. It does not replace the 24 held-out questions. See `chunk_boundary_failure_lab.md` and `.csv`.\n"),
-            ("## Reranker case inspection", "\n\n## Reranker case inspection\n\nR2/R3 candidate-set equality is asserted per query. See `reranker_case_analysis.md`. The artifact reports the measured number of improved/degraded cases and explicitly leaves the 5+5 requirement pending if the corpus does not produce enough examples; automated notes are not human inspection.\n"),
-            ("## Retriever rescue cases", "\n\n## Retriever rescue cases\n\nPer-query sparse, dense, and hybrid outcomes, including individual retriever rescues and hybrid misses, are in `retriever_rescue_analysis.md`.\n"),
+            ("## Reranker case inspection", "\n\n## Reranker case inspection\n\nR2/R3 candidate-set equality is asserted per query. See `reranker_case_analysis.md`. The artifact reports measured case counts and explicitly leaves the 5+5 requirement pending if the corpus does not produce enough examples; automated notes are not human inspection.\n"),
+            ("## Retriever rescue cases", "\n\n## Retriever rescue cases\n\nPer-query sparse, dense, and hybrid outcomes, including individual retriever rescues and hybrid misses, are in `retriever_rescue_analysis.md`. Unanswerable cases are excluded from miss counts.\n"),
             ("## Trusted-source conflict detection", "\n\n## Trusted-source conflict detection\n\nA separate two-manual AX-17 fixture checks contradictory trusted upload limits (20 MB vs 40 MB). Equal product, authority, publication date, and version precedence must produce `conflicting_evidence` and both citations. See `conflict_detection.json`.\n"),
         ]
-        for heading, section in additions:
+        for heading, section in sections:
             if heading not in report:
                 report += section
         report_path.write_text(report, encoding="utf-8")
 
-    print(f"Generated audit artifacts in {output}. Human reranker review is pending if the 5+5 minimum is not met.")
+    print(f"Generated audit artifacts in {output}. Human reranker review remains pending if the 5+5 minimum is not met.")
 
 
 if __name__ == "__main__":

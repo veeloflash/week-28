@@ -35,25 +35,30 @@ The app reads the source manifest and splits manuals into chunks with source IDs
 | R3 | Rerank the same 12 candidates before keeping five |
 | R4 | Add guarded query expansion |
 
-## Evaluation and audit status
+## Results and audit status
 
-The baseline evaluation uses eight development questions and 24 held-out questions. Existing result files are in [`Week28_Engineering/results/`](Week28_Engineering/results/):
+The existing baseline uses eight development questions and 24 held-out questions. Result files live in [`Week28_Engineering/results/`](Week28_Engineering/results/):
 
 - [Optimization report](Week28_Engineering/results/Retrieval_Optimization_Report.md)
 - [Benchmark table](Week28_Engineering/results/benchmark.csv)
 - [Chunk comparison](Week28_Engineering/results/chunk_comparison.csv)
 - [Retrieval traces](Week28_Engineering/results/retrieval_traces.jsonl)
 - [Security audit](Week28_Engineering/results/security.json)
+- [Public requirement and acceptance mapping](Week28_Engineering/results/real_client_requirement.md)
 
-The held-out baseline reports Recall@5 of 0.864 for R0 and 1.000 for R1–R4, and MRR@5 of 1.000 for R3. These are results on the synthetic manual corpus, not evidence of a contracted client deployment.
+The baseline reports Recall@5 of 0.864 for R0 and 1.000 for R1–R4, and MRR@5 of 1.000 for R3, on the synthetic corpus. This is a public-requirement-aligned prototype, not evidence of a commissioned client delivery or validation on real client documents.
 
-A public client-requirement reference and its acceptance mapping are documented in [`Week28_Engineering/results/real_client_requirement.md`](Week28_Engineering/results/real_client_requirement.md). It is explicitly a public issue used as a requirements reference, not a claim that the issue author commissioned this project.
-
-To reproduce the existing baseline from the project directory:
+Reproduce the existing baseline from the project directory:
 
 ```powershell
 python -m unittest -v
 python benchmark.py --output .\results-rerun
 ```
 
-See the audit script and its output instructions in `Week28_Engineering/coursework_audits.py` for the additional overlap, chunk-boundary, reranker, retriever-rescue, and conflict-detection labs.
+Run the additional coursework audits to generate the overlap, chunk-boundary, reranker, retriever-rescue, and conflict-detection artifacts:
+
+```powershell
+python coursework_audits.py --embedding minilm
+```
+
+The script writes result artifacts under `Week28_Engineering/results/`. Reranker 5-improved/5-degraded human inspection remains explicitly incomplete if the measured query set does not produce enough cases; no cases are fabricated.
