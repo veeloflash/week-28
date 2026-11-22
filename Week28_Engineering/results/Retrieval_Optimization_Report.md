@@ -2,13 +2,13 @@
 
 ## Client and problem
 
-This is a simulated support client. Its search has to find the right manual passage even when two devices share an error code, or when a customer describes a problem in their own words.
+This is a public-requirement-aligned prototype, not a commissioned client delivery. It references [LlamaIndex issue #19370](https://github.com/run-llama/llama_index/issues/19370), created 2025-07-09, a public report about RAG folder filtering leaking unselected paths. The AX-17/AX-18 corpus is synthetic and remains a controlled test fixture; no real client corpus has been validated. See `real_client_requirement.md` for source, requirement summary, client problem, and acceptance criteria.
 
 ## Corpus and method
 
-I used 4 versioned Markdown documents, including one untrusted forum post. The benchmark has 8 development questions and 24 held-out questions. The evidence labels identify exact source spans so they still work when chunk IDs change. The dense backend was sentence-transformers/all-MiniLM-L6-v2 (quantized ONNX, 384 dimensions). The answer formatter stayed fixed.
+I used four versioned Markdown documents, including one untrusted forum post. The baseline benchmark has eight development questions and 24 held-out questions. Evidence labels identify exact source spans so they remain valid when chunk IDs change. The dense backend is MiniLM ONNX, and the answer formatter is held constant.
 
-R0 starts with dense retrieval and fixed 32-word chunks. R1 uses the chunk setup selected on development questions. R2 adds BM25 and RRF, R3 rescores the same candidate set with the controlled reranker, and R4 adds guarded query expansion. Each run keeps 12 candidates and evaluates the top 5.
+R0 uses dense retrieval and fixed 32-word chunks. R1 uses the chunk configuration selected on development questions. R2 adds BM25 and RRF; R3 reranks the same candidate set; R4 adds guarded query expansion. Each stage retrieves 12 candidates and evaluates the top five.
 
 ## Chunk comparison on development questions
 
@@ -19,7 +19,7 @@ R0 starts with dense retrieval and fixed 32-word chunks. R1 uses the chunk setup
 | fixed64 | 1.000 | 0.792 | 1.000 | 4.712 | 5.330 | 285.6 |
 | sections | 1.000 | 1.000 | 1.000 | 5.218 | 6.355 | 95.6 |
 
-Chunk counts and indexed words for each setting are in `chunk_inventory.csv`. Overlapping character coverage in the selected context is recorded as the duplicate fraction.
+These are the original chunk-lab runs, not the new four-point overlap audit. The latter is produced by `coursework_audits.py` and recorded separately in `overlap_cost_audit.csv`/`.md` after running the audit.
 
 ## Held-out R0–R4 comparison
 
@@ -31,7 +31,7 @@ Chunk counts and indexed words for each setting are in `chunk_inventory.csv`. Ov
 | R3 | 1.000 | 1.000 | 1.000 | 5.336 | 6.567 | 102.6 |
 | R4 | 1.000 | 1.000 | 1.000 | 6.175 | 10.320 | 102.6 |
 
-Recall measures how many labelled evidence spans are covered by the selected chunks, including spans covered across adjacent chunks. MRR counts the first result that contains a complete labelled span. Chunk-ID Recall is reported separately. Unanswerable queries are excluded from recall and MRR.
+Recall measures coverage of labeled evidence spans in the selected results, including coverage across adjacent chunks. MRR uses the first selected chunk containing a complete labeled span. Unanswerable questions are excluded from recall and MRR.
 
 ## Sparse versus dense on the selected chunk setup
 
@@ -41,6 +41,8 @@ Recall measures how many labelled evidence spans are covered by the selected chu
 | dense | 1.000 | 0.871 | 1.000 | 4.620 | 6.193 | 96.2 |
 | hybrid | 1.000 | 0.955 | 1.000 | 3.801 | 6.349 | 100.9 |
 
+Per-query rescue examples and hybrid misses are generated in `retriever_rescue_analysis.md`; the aggregate metrics alone do not identify which retriever rescued a query.
+
 ## Expansion control
 
 | Run | Evidence Recall@5 | MRR@5 | All evidence | P50 ms | P95 ms | Avg. context tokens |
@@ -49,31 +51,28 @@ Recall measures how many labelled evidence spans are covered by the selected chu
 | guarded | 1.000 | 1.000 | 1.000 | 6.175 | 10.320 | 102.6 |
 | broad | 1.000 | 1.000 | 1.000 | 10.155 | 11.188 | 103.9 |
 
-Guarded expansion leaves precise wording alone. The broad control adds generic wording and may drop syntax such as API parentheses. The traces record rewritten identifiers lost and every question where expansion reduced evidence recall. The original query remains a separate branch.
+Guarded expansion preserves precise wording. The broad control adds generic wording and can remove syntax such as API parentheses. Traces record rewritten identifiers and recall changes.
 
-## Security check
+## Security check: untrusted content
 
-- sparse_unfiltered: untrusted top-5 ranks [1]; untrusted excerpt cited: False.
-- sparse_filtered: untrusted top-5 ranks []; untrusted excerpt cited: False.
-- dense_unfiltered: untrusted top-5 ranks [1]; untrusted excerpt cited: False.
-- dense_filtered: untrusted top-5 ranks []; untrusted excerpt cited: False.
-- hybrid_unfiltered: untrusted top-5 ranks [1]; untrusted excerpt cited: False.
-- hybrid_filtered: untrusted top-5 ranks []; untrusted excerpt cited: False.
+The existing security audit reports that the adversarial forum post can rank highly when unfiltered, while trusted filtering excludes it and the answer stage does not cite untrusted content. Trust comes from the source manifest, not search score.
 
-Authority comes from the source manifest. Search score does not set trust. Identical chunks are deduplicated within each ranking. The answer stage excludes untrusted passages even when the audit deliberately disables the retrieval filter.
+## Trusted-source conflict detection
 
-## Failure examples
+A separate trusted-source fixture contains two AX-17 manuals with conflicting upload limits (20 MB and 40 MB). The conflict handler scopes claims to product and compares source authority, publication date, and document version. Tied contradictory evidence returns `conflicting_evidence` with both citations; a unique precedence winner can be selected. The audit fixture tests this behavior. In the interactive app, conflict checking is activated when the selected data directory contains `source_metadata.json`.
 
-- R0 Q03 (exact, partial_span_or_boundary): What does send_logs() do on AX-17? First result: AX-17 diagnostics.
-- R0 Q09 (paraphrase, partial_span_or_boundary): How can I get the AX-17 diagnostic information out of the device? First result: AX-17 firmware 2.1 recovery.
-- R0 Q20 (exact, partial_span_or_boundary): How much free space does AX-17 need before installing an update? First result: AX-17 battery and charging.
+## Chunk boundary failure lab
 
-The full failure counts, slice scores and source spans are in `benchmark.json` and `retrieval_traces.jsonl`.
+A dedicated 12-question known-evidence fixture covers heading/paragraph, table header/row, code/explanation, multi-fact boundaries, long sections, overlap rescue, and section-aware rescue. It is separate from the existing eight development and 24 held-out queries. Run `coursework_audits.py` to generate `chunk_boundary_failure_lab.csv` and `.md`.
 
-## Recommendation
+## Reranker case inspection
 
-I would start a pilot with **R1** and **sections**. This stage was selected on development evidence recall, complete coverage and MRR, with duplication and work as tie-breakers. Held-out evidence Recall@5 was 1.000 versus 0.864 for R0. MRR@5 was 0.871. It abstained on 2/2 unanswerable questions.
+R2 and R3 use the same candidates; the audit asserts equality per query. `reranker_case_analysis.md` lists measured changes. The requirement to inspect five improved and five degraded examples is not claimed complete unless the generated case set has at least five in each category and a person reviews them. If fewer are measured, add difficult evidence-grounded distractor queries rather than invent cases.
 
-R3 reached MRR@5 of 1.000 on the held-out set, so I would also compare it with R1 in a fresh pilot where the first result matters. That observation did not change the development-based default.
+## Failure examples and recommendation
 
-These runs measure a small synthetic English corpus on one machine with an already-built index. The timing is retrieval only. Counts of embedding calls, lexical calls, scored pairs and indexed/context words are cost proxies. No API usage was billed. Evidence coverage does not measure whether a person found the quoted answer helpful. Before production I would test with independent real support queries, more unknown products and versions, and a wider set of malicious documents.
+The original R0 trace includes boundary/partial-span misses such as Q03, Q09, and Q20. Full failure counts, spans, and traces remain in `benchmark.json` and `retrieval_traces.jsonl`.
+
+The original baseline recommends R1 with section-aware chunks for a pilot, based on development evidence recall, complete coverage, MRR, and cost proxies. R3 reached held-out MRR@5 of 1.000, so it is worth separately evaluating when first-result ranking matters.
+
+All reported baseline timings use a small synthetic English corpus on one machine with an already-built index. Retrieval latency excludes index build and API billing. This report does not claim production client acceptance or real-corpus validation.
