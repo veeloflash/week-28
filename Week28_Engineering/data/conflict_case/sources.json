@@ -1,0 +1,4 @@
+[
+  {"id":"conflict_v1","path":"manuals/manual_v1.md","title":"AX-17 Manual v1","version":"1.0","trusted":true},
+  {"id":"conflict_v2","path":"manuals/manual_v2.md","title":"AX-17 Manual v2","version":"1.0","trusted":true}
+]
