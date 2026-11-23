@@ -1,0 +1,5 @@
+config,chunk_size,overlap,chunk_count,duplicate_percent,recall_at_5,mrr_at_5,context_tokens,p50_ms,p95_ms
+fixed32_overlap0,32,0,20,0.0,0.875,0.625,151.375,2.725,4.06
+fixed32_overlap8,32,8,24,21.879,0.875,0.5625,156.25,1.74,3.185
+fixed32_overlap16,32,16,33,45.105,1.0,0.7083,159.125,1.891,2.782
+fixed32_overlap24,32,24,61,70.833,1.0,0.6667,160,2.744,3.822

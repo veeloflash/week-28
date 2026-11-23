@@ -81,6 +81,27 @@ class PipelineTests(unittest.TestCase):
         self.assertTrue(any(hit["sparse_ranks"] and hit["dense_ranks"] for hit in result["trace"]))
         self.assertTrue(all("citation" in passage for passage in row["answer"]["passages"]))
 
+    def test_allowed_source_scope_is_enforced_before_ranking_and_answering(self):
+        query = self.cases['Q02']['query']
+        for method in ('sparse', 'dense', 'hybrid'):
+            for rerank in (False, True):
+                for expansion in ('off', 'guarded', 'broad'):
+                    result = self.index.search(query, method=method, rerank=rerank,
+                                               expansion=expansion, allowed_sources=['ax17'])
+                    self.assertTrue(all(hit['chunk']['source_id'] == 'ax17' for hit in result['trace']))
+                    self.assertTrue(all(p['source_id'] == 'ax17' for p in self.index.answer(result)['passages']))
+        result = self.index.search(query, allowed_sources=[])
+        self.assertEqual(result['candidates'], [])
+        self.assertEqual(self.index.answer(result)['status'], 'insufficient_evidence')
+        for invalid in ('ax17', ['unknown'], [2], {}):
+            with self.assertRaises(ValueError):
+                self.index.search(query, allowed_sources=invalid)
+        # Defense in depth: a caller cannot cite a selected hit after narrowing
+        # the result's scope independently of ranking.
+        result = self.index.search(query)
+        result['allowed_sources'] = []
+        self.assertEqual(self.index.answer(result)['passages'], [])
+
     def test_server_normal_and_invalid_requests(self):
         selection = {"stage": "R1", "chunk": "sections", "r1_chunk": "sections", "embedding": "minilm"}
         app = SearchApp(self.data, selection, "minilm")
@@ -106,6 +127,19 @@ class PipelineTests(unittest.TestCase):
                         self.assertEqual(data["stage"], "R1")
                         self.assertTrue(data["trace"])
                         self.assertIn("temperature sensor failed", data["answer"]["answer"])
+                for scope, expected in (([], 200), (['ax17'], 200), (['unknown'], 400), ('ax17', 400)):
+                    request = Request(base + '/api/search', json.dumps({
+                        'query': self.cases['Q02']['query'], 'allowed_sources': scope}).encode(),
+                        headers={'Content-Type': 'application/json'})
+                    if expected == 400:
+                        with self.assertRaises(HTTPError) as raised:
+                            urlopen(request, timeout=5)
+                        self.assertEqual(raised.exception.code, 400)
+                    else:
+                        with urlopen(request, timeout=5) as response:
+                            scoped = json.load(response)
+                        self.assertTrue(all(hit['chunk']['source_id'] in scope for hit in scoped['trace']))
+                        self.assertTrue(all(p['source_id'] in scope for p in scoped['answer']['passages']))
             finally:
                 server.shutdown()
                 thread.join()

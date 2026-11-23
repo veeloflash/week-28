@@ -57,7 +57,7 @@ class SearchApp:
         metadata_path = self.data / "source_metadata.json"
         self.source_metadata = json.loads(metadata_path.read_text(encoding="utf-8")) if metadata_path.exists() else {}
 
-    def search(self, query, stage=None, chunk=None, *, generate=False):
+    def search(self, query, stage=None, chunk=None, *, generate=False, allowed_sources=None):
         stage = stage or self.selection["stage"]
         if stage not in STAGES or (chunk is not None and chunk not in CHUNK_CONFIGS):
             raise ValueError("Choose a known retrieval stage and chunk strategy.")
@@ -66,7 +66,7 @@ class SearchApp:
             if chunk not in self.indexes:
                 self.indexes[chunk] = Index(self.sources, CHUNK_CONFIGS[chunk], self.embedder)
             index = self.indexes[chunk]
-            result = index.search(query, **STAGES[stage])
+            result = index.search(query, **STAGES[stage], allowed_sources=allowed_sources)
         answer = index.answer(result)
         if self.source_metadata:
             answer = apply_conflict_detection(index, result, answer, self.source_metadata)
@@ -121,7 +121,8 @@ class Handler(BaseHTTPRequestHandler):
                 if body.get(key) is not None and not isinstance(body[key], str):
                     raise ValueError(f"Invalid {key} option.")
             result = self.app.search(body["query"], body.get("stage"), body.get("chunk"),
-                                     generate=body.get("generate") is True)
+                                     generate=body.get("generate") is True,
+                                     allowed_sources=body.get("allowed_sources"))
         except ValueError as error:
             self.send_json(400, {"error": str(error)})
             return

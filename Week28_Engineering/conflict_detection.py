@@ -20,7 +20,7 @@ def apply_conflict_detection(index, result, answer, source_metadata):
     """
     query_ids = identifiers(result.get("query", ""))
     products = {value.casefold() for value in query_ids if value.startswith("ax-")}
-    if "upload" not in result.get("query", "").casefold() or not products:
+    if not re.search(r"upload|attachment", result.get("query", ""), re.I) or not products:
         return answer
 
     claims = []
@@ -28,10 +28,13 @@ def apply_conflict_detection(index, result, answer, source_metadata):
         source_id = passage.get("source_id")
         metadata = source_metadata.get(source_id, {})
         product = metadata.get("product", "")
-        if product and product.casefold() not in products:
+        if not product or product.casefold() not in products:
             continue
         chunk = index.chunks.get(passage.get("chunk_id"))
         if chunk is None or not chunk.trusted:
+            continue
+        if (result.get("allowed_sources") is not None
+                and source_id not in result["allowed_sources"]):
             continue
         for match in UPLOAD_LIMIT.finditer(passage.get("text", "")):
             claims.append({
@@ -55,7 +58,8 @@ def apply_conflict_detection(index, result, answer, source_metadata):
                 passages.append(passage)
                 seen.add(key)
         return {**answer, "status": "conflicting_evidence", "passages": passages,
-                "answer": "Trusted sources disagree about the upload limit. Please review both cited passages."}
+                "answer": "Trusted sources disagree about the upload limit. Please review both cited passages.\n\n"
+                          + "\n\n".join(f"{p['text']}\n[{p['citation']}]" for p in passages)}
 
     selected, seen = [], set()
     for claim in winners:

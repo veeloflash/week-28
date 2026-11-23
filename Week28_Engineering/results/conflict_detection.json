@@ -1,0 +1,61 @@
+{
+  "query": "What is the AX-17 upload limit?",
+  "status": "conflicting_evidence",
+  "passages": [
+    {
+      "text": "## Uploads\nThe AX-17 accepts individual uploads up to 40 MB.",
+      "chunk_id": "conflict_v2:1.0:19-80:92a3bb422cab",
+      "source_id": "conflict_v2",
+      "citation": "AX-17 Manual v2 v1.0, manuals/manual_v2.md:3-4"
+    },
+    {
+      "text": "## Uploads\nThe AX-17 accepts individual uploads up to 20 MB.",
+      "chunk_id": "conflict_v1:1.0:19-80:7f12f597fbe8",
+      "source_id": "conflict_v1",
+      "citation": "AX-17 Manual v1 v1.0, manuals/manual_v1.md:3-4"
+    }
+  ],
+  "answer": "Trusted sources disagree about the upload limit. Please review both cited passages.\n\n## Uploads\nThe AX-17 accepts individual uploads up to 40 MB.\n[AX-17 Manual v2 v1.0, manuals/manual_v2.md:3-4]\n\n## Uploads\nThe AX-17 accepts individual uploads up to 20 MB.\n[AX-17 Manual v1 v1.0, manuals/manual_v1.md:3-4]",
+  "expected_status": "conflicting_evidence",
+  "resolution_cases": {
+    "authority": {
+      "status": "evidence_found",
+      "passages": [
+        {
+          "text": "## Uploads\nThe AX-17 accepts individual uploads up to 40 MB.",
+          "chunk_id": "conflict_v2:1.0:19-80:92a3bb422cab",
+          "source_id": "conflict_v2",
+          "citation": "AX-17 Manual v2 v1.0, manuals/manual_v2.md:3-4"
+        }
+      ],
+      "answer": "## Uploads\nThe AX-17 accepts individual uploads up to 40 MB.\n[AX-17 Manual v2 v1.0, manuals/manual_v2.md:3-4]",
+      "conflict_resolution": "selected highest source authority, publication date, then version"
+    },
+    "date": {
+      "status": "evidence_found",
+      "passages": [
+        {
+          "text": "## Uploads\nThe AX-17 accepts individual uploads up to 40 MB.",
+          "chunk_id": "conflict_v2:1.0:19-80:92a3bb422cab",
+          "source_id": "conflict_v2",
+          "citation": "AX-17 Manual v2 v1.0, manuals/manual_v2.md:3-4"
+        }
+      ],
+      "answer": "## Uploads\nThe AX-17 accepts individual uploads up to 40 MB.\n[AX-17 Manual v2 v1.0, manuals/manual_v2.md:3-4]",
+      "conflict_resolution": "selected highest source authority, publication date, then version"
+    },
+    "version": {
+      "status": "evidence_found",
+      "passages": [
+        {
+          "text": "## Uploads\nThe AX-17 accepts individual uploads up to 40 MB.",
+          "chunk_id": "conflict_v2:2.0:19-80:92a3bb422cab",
+          "source_id": "conflict_v2",
+          "citation": "AX-17 Manual v2 v2.0, manuals/manual_v2.md:3-4"
+        }
+      ],
+      "answer": "## Uploads\nThe AX-17 accepts individual uploads up to 40 MB.\n[AX-17 Manual v2 v2.0, manuals/manual_v2.md:3-4]",
+      "conflict_resolution": "selected highest source authority, publication date, then version"
+    }
+  }
+}

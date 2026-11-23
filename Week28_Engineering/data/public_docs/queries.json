@@ -1,0 +1,8 @@
+[
+  {"id":"P01","split":"pilot","slice":"exact","query":"How do I create a tutorial virtual environment?","evidence":[["tutorial_venv","python -m venv tutorial-env"]]},
+  {"id":"P02","split":"pilot","slice":"exact","query":"How do I activate the tutorial environment on Windows?","evidence":[["tutorial_venv","tutorial-env\\Scripts\\activate"]]},
+  {"id":"P03","split":"pilot","slice":"exact","query":"Does ensurepip need internet access to bootstrap pip?","evidence":[["ensurepip","This module *does not* access the internet."]]},
+  {"id":"P04","split":"pilot","slice":"exact","query":"How can I upgrade the bundled pip using ensurepip?","evidence":[["ensurepip","python -m ensurepip --upgrade"]]},
+  {"id":"P05","split":"pilot","slice":"exact","query":"Which ensurepip flag avoids installing the pipX script?","evidence":[["ensurepip","* ``--altinstall``: if an alternate installation is requested, the ``pipX``\n  script will *not* be installed."]]},
+  {"id":"P06","split":"pilot","slice":"exact","query":"Can I reuse an existing directory when creating a venv?","evidence":[["venv","If an existing directory is specified, it will be re-used."]]}
+]

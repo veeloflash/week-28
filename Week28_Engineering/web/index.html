@@ -91,7 +91,9 @@ get('search').addEventListener('submit', async event => {
     add(result, 'h2', 'Answer from the manuals');
     if (data.answer.local_summary) add(result, 'p', data.answer.local_summary);
     if (data.answer.summary_error) add(result, 'p', data.answer.summary_error);
-    if (!data.answer.passages.length) add(result, 'p', data.answer.answer);
+    if (!data.answer.passages.length || data.answer.status === 'conflicting_evidence') {
+      add(result, 'p', data.answer.answer);
+    }
     data.answer.passages.forEach((passage, i) => {
       const article = add(result, 'article');
       add(article, 'pre', passage.text);

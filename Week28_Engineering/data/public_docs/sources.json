@@ -1,0 +1,23 @@
+[
+  {
+    "id": "tutorial_venv",
+    "path": "manuals/tutorial_venv.txt",
+    "title": "CPython Doc/tutorial/venv.rst",
+    "version": "3.12.8",
+    "trusted": true
+  },
+  {
+    "id": "venv",
+    "path": "manuals/venv.txt",
+    "title": "CPython Doc/library/venv.rst",
+    "version": "3.12.8",
+    "trusted": true
+  },
+  {
+    "id": "ensurepip",
+    "path": "manuals/ensurepip.txt",
+    "title": "CPython Doc/library/ensurepip.rst",
+    "version": "3.12.8",
+    "trusted": true
+  }
+]

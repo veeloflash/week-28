@@ -1,0 +1,171 @@
+[
+  {
+    "id": "S01",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q01",
+    "query": "I already resolved AX-17 ERR-4021 network cable disconnected. Separately, What should I do for ERR-4022 on AX-17?",
+    "evidence": [
+      [
+        "ax17",
+        "On the AX-17, ERR-4022 means the account token expired. Sign out and then sign in again to get a fresh token."
+      ]
+    ]
+  },
+  {
+    "id": "S02",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q02",
+    "query": "I already resolved AX-17 ERR-4021 network cable disconnected. Separately, What should I do for ERR-4021 on AX-18?",
+    "evidence": [
+      [
+        "ax18",
+        "On the AX-18, ERR-4021 means the temperature sensor failed. Turn off the unit and contact support for service."
+      ]
+    ]
+  },
+  {
+    "id": "S03",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q03",
+    "query": "The ticket was tagged AX-17 firmware 2.1 recovery Power 10 seconds, but my actual question is: What does send_logs() do on AX-17?",
+    "evidence": [
+      [
+        "ax17",
+        "Use send_logs() to export diagnostic logs."
+      ]
+    ]
+  },
+  {
+    "id": "S04",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q04",
+    "query": "The ticket was tagged AX-17 firmware 2.1 recovery Power 10 seconds, but my actual question is: What is AX-17's maximum upload size?",
+    "evidence": [
+      [
+        "ax17",
+        "The AX-17 accepts individual uploads up to 20 MB."
+      ]
+    ]
+  },
+  {
+    "id": "S05",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q05",
+    "query": "I already resolved AX-17 firmware 2.1 recovery Power 10 seconds. Separately, I forgot my password. How can I get back into my account?",
+    "evidence": [
+      [
+        "ax17",
+        "Use the account recovery link to reset a forgotten password."
+      ]
+    ]
+  },
+  {
+    "id": "S06",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q02",
+    "query": "I already resolved AX-17 firmware 2.2 recovery Power 5 seconds. Separately, What should I do for ERR-4021 on AX-18?",
+    "evidence": [
+      [
+        "ax18",
+        "On the AX-18, ERR-4021 means the temperature sensor failed. Turn off the unit and contact support for service."
+      ]
+    ]
+  },
+  {
+    "id": "S07",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q03",
+    "query": "The ticket was tagged AX-18 ERR-4021 temperature sensor failed, but my actual question is: What does send_logs() do on AX-17?",
+    "evidence": [
+      [
+        "ax17",
+        "Use send_logs() to export diagnostic logs."
+      ]
+    ]
+  },
+  {
+    "id": "S08",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q04",
+    "query": "I already resolved AX-18 ERR-4021 temperature sensor failed. Separately, What is AX-17's maximum upload size?",
+    "evidence": [
+      [
+        "ax17",
+        "The AX-17 accepts individual uploads up to 20 MB."
+      ]
+    ]
+  },
+  {
+    "id": "S09",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q05",
+    "query": "I already resolved AX-18 ERR-4021 temperature sensor failed. Separately, I forgot my password. How can I get back into my account?",
+    "evidence": [
+      [
+        "ax17",
+        "Use the account recovery link to reset a forgotten password."
+      ]
+    ]
+  },
+  {
+    "id": "S10",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q06",
+    "query": "I already resolved AX-18 ERR-4021 temperature sensor failed. Separately, My AX-17 turns on but the screen stays dark. What should I reconnect?",
+    "evidence": [
+      [
+        "ax17",
+        "If the display stays blank after boot, reconnect the display cable and restart the device once."
+      ]
+    ]
+  },
+  {
+    "id": "S11",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q01",
+    "query": "I already resolved AX-17 battery charging steady amber green. Separately, What should I do for ERR-4022 on AX-17?",
+    "evidence": [
+      [
+        "ax17",
+        "On the AX-17, ERR-4022 means the account token expired. Sign out and then sign in again to get a fresh token."
+      ]
+    ]
+  },
+  {
+    "id": "S12",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q02",
+    "query": "I already resolved AX-17 password account token expired login. Separately, What should I do for ERR-4021 on AX-18?",
+    "evidence": [
+      [
+        "ax18",
+        "On the AX-18, ERR-4021 means the temperature sensor failed. Turn off the unit and contact support for service."
+      ]
+    ]
+  },
+  {
+    "id": "S13",
+    "split": "stress",
+    "slice": "distractor_context",
+    "original_id": "Q15",
+    "query": "I already resolved AX-18 upload 40 MB. Separately, ax17 err 4021 cabel unpluged, fix?",
+    "evidence": [
+      [
+        "ax17",
+        "On the AX-17, ERR-4021 means the network cable is disconnected. Reconnect the network cable, wait for the link light, and retry the connection."
+      ]
+    ]
+  }
+]

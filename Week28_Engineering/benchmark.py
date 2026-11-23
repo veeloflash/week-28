@@ -183,8 +183,13 @@ def write_report(path, report, traces):
     lines = [
         "# Retrieval Optimization Report", "",
         "## Client and problem", "",
-        "This is a simulated support client. Its search has to find the right manual passage even when "
-        "two devices share an error code, or when a customer describes a problem in their own words.", "",
+        "This prototype addresses a real public source-isolation requirement documented in "
+        "[LlamaIndex issue #19370](https://github.com/run-llama/llama_index/issues/19370). "
+        "The source URL, date, original requirement, client problem and acceptance mapping are in "
+        "[real_client_requirement.md](real_client_requirement.md). AX-17/AX-18 are synthetic fixtures "
+        "for controlled ranking experiments; they are not client documents. The separate CPython "
+        "public-document pilot validates local retrieval and allowed-source isolation. "
+        "No commissioned engagement, Azure integration fix, or client acceptance is claimed.", "",
         "## Corpus and method", "",
         f"I used {report['source_count']} versioned Markdown documents, including one untrusted forum post. "
         f"The benchmark has {report['dev_count']} development questions and {report['test_count']} held-out questions. "
@@ -239,7 +244,16 @@ def write_report(path, report, traces):
               "The timing is retrieval only. Counts of embedding calls, lexical calls, scored pairs and indexed/context "
               "words are cost proxies. No API usage was billed. Evidence coverage does not measure whether a person "
               "found the quoted answer helpful. Before production I would test with independent real support queries, "
-              "more unknown products and versions, and a wider set of malicious documents.", ""]
+              "more unknown products and versions, and a wider set of malicious documents.", "",
+              "## Additional coursework evidence", "",
+              "The original dev/test selection above is unchanged by these separate diagnostic labs:", "",
+              "- [Overlap cost audit](overlap_cost_audit.md): size 32, overlap 0/8/16/24, duplication, ranking and context cost.",
+              "- [Chunk boundary lab](chunk_boundary_failure_lab.md): 12 labelled questions and boundary-specific analysis.",
+              "- [Reranker cases](reranker_case_analysis.md): five improved and five degraded stress cases with paired score inspection.",
+              "- [Retriever rescue cases](retriever_rescue_analysis.md): dense rescue, sparse rescue and hybrid failure examples.",
+              "- [Conflict detection](conflict_detection.json): ambiguous trusted claims and precedence-based resolution.",
+              "- [Public-document validation](public_corpus_validation.md): real documentation and source-scope isolation checks.",
+              "- [Completion checklist](completion_checklist.md): evidence for each requested correction and remaining external sign-offs.", ""]
     path.write_text("\n".join(lines), encoding="utf-8")
 
 

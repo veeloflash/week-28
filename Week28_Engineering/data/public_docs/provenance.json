@@ -1,0 +1,23 @@
+[
+  {
+    "source_id": "tutorial_venv",
+    "url": "https://raw.githubusercontent.com/python/cpython/v3.12.8/Doc/tutorial/venv.rst",
+    "retrieved_on": "2026-11-23",
+    "sha256": "f9dac36833979e1e2885ea9bdb1975548b6ff6fca7f57bb3ba6a77810c93d7ac",
+    "license": "Python Software Foundation License"
+  },
+  {
+    "source_id": "venv",
+    "url": "https://raw.githubusercontent.com/python/cpython/v3.12.8/Doc/library/venv.rst",
+    "retrieved_on": "2026-11-23",
+    "sha256": "4b7bd1a665aca29bb883d944bbadf5ffcccfe37cca958184f1d8903a1062bca1",
+    "license": "Python Software Foundation License"
+  },
+  {
+    "source_id": "ensurepip",
+    "url": "https://raw.githubusercontent.com/python/cpython/v3.12.8/Doc/library/ensurepip.rst",
+    "retrieved_on": "2026-11-23",
+    "sha256": "4c1afe0ae2fbb752b98df5a7bd7111514e6e86dbb74fb0ad03b35a94eeb70048",
+    "license": "Python Software Foundation License"
+  }
+]

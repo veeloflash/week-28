@@ -13,11 +13,13 @@ A RAG application's user-selected folder/source scope must be a hard boundary: e
 
 ## Acceptance criteria mapped to this prototype
 
-1. Trusted-source filtering excludes the untrusted forum fixture from normal retrieval and answers.
-2. Returned evidence passages retain source identity and a line-based citation.
-3. Retrieval traces record candidates and selected passages so provenance and filtering can be audited.
-4. A real-corpus follow-up must assert that every returned source is in the caller's selected set. This criterion is not validated by the synthetic fixture.
+1. `allowed_sources` is a hard source-ID allowlist applied before sparse/dense ranking and RRF. `None` means all trusted sources; an empty list means no sources; unknown IDs fail with HTTP 400. This is separate from trusted/untrusted filtering.
+2. The answer stage rechecks that cited chunks belong to the selected source set; passages retain source identity and line-based citations.
+3. Retrieval traces expose the allowed source set, candidates and selected passages for auditing.
+4. On three real CPython documentation files, every returned/cited source must be within the selected set, including queries whose supporting passage is in an excluded document. The [public pilot](public_corpus_validation.md) passes 90 such checks; the [JSON](public_corpus_validation.json) lists all source combinations.
 
 ## Scope and evidence limitation
 
-This work maps the public requirement to local trusted-source filtering, provenance, and retrieval audits. It does **not** claim to fix Azure AI Search's `odata_filters` integration or to be a commissioned client delivery. AX-17/AX-18 documents are synthetic controlled-benchmark fixtures. No production client corpus or real-document validation is included yet.
+This work implements the public requirement's local source-isolation property and validates it on real public documentation. It does **not** claim to fix Azure AI Search's `odata_filters` integration, its recursion limits, or to be a commissioned client delivery. AX-17/AX-18 documents remain synthetic controlled-benchmark fixtures. The CPython pilot is a small public-document validation, not a production client corpus, 50k-path scale test, or evidence of acceptance by the issue author.
+
+The source and issue creation date were verified on 2026-11-23. The original requirement is scoped to Azure/LlamaIndex; the local mapping above is our derived acceptance specification. See [snapshots and provenance](../data/public_docs/provenance.json) for the independent real-document pilot.

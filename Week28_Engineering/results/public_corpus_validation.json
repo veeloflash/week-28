@@ -1,0 +1,1281 @@
+{
+  "backend": "minilm",
+  "source_count": 3,
+  "chunk_count": 92,
+  "query_count": 6,
+  "scores": {
+    "sparse": {
+      "queries": 6,
+      "answerable": 6,
+      "recall_at_5": 1.0,
+      "chunk_recall_at_5": 1.0,
+      "mrr_at_5": 0.7222,
+      "complete_rate": 1,
+      "candidate_recall": 1.0,
+      "answer_evidence_rate": 1,
+      "abstained_unanswerable": 0,
+      "duplicate_fraction": 0.0,
+      "context_tokens": 275,
+      "p50_ms": 1.198,
+      "p95_ms": 1.819,
+      "embedding_calls": 0,
+      "lexical_calls": 1,
+      "scored_pairs": 0,
+      "errors": {
+        "ok": 6
+      }
+    },
+    "dense": {
+      "queries": 6,
+      "answerable": 6,
+      "recall_at_5": 1.0,
+      "chunk_recall_at_5": 1.0,
+      "mrr_at_5": 0.5889,
+      "complete_rate": 1,
+      "candidate_recall": 1.0,
+      "answer_evidence_rate": 1,
+      "abstained_unanswerable": 0,
+      "duplicate_fraction": 0.0,
+      "context_tokens": 275,
+      "p50_ms": 4.514,
+      "p95_ms": 4.718,
+      "embedding_calls": 1,
+      "lexical_calls": 0,
+      "scored_pairs": 0,
+      "errors": {
+        "ok": 6
+      }
+    },
+    "hybrid": {
+      "queries": 6,
+      "answerable": 6,
+      "recall_at_5": 1.0,
+      "chunk_recall_at_5": 1.0,
+      "mrr_at_5": 0.8333,
+      "complete_rate": 1,
+      "candidate_recall": 1.0,
+      "answer_evidence_rate": 1,
+      "abstained_unanswerable": 0,
+      "duplicate_fraction": 0.0,
+      "context_tokens": 275,
+      "p50_ms": 5.529,
+      "p95_ms": 5.979,
+      "embedding_calls": 1,
+      "lexical_calls": 1,
+      "scored_pairs": 0,
+      "errors": {
+        "ok": 6
+      }
+    }
+  },
+  "scope_checks": [
+    {
+      "query_id": "P01",
+      "method": "sparse",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "sparse",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "sparse",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "sparse",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "sparse",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "sparse",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "sparse",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "sparse",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "sparse",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "sparse",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "sparse",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "sparse",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "sparse",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "sparse",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "sparse",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "sparse",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "sparse",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "sparse",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "sparse",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "dense",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "dense",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "dense",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "dense",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "dense",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "dense",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "dense",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "dense",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "dense",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "dense",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "dense",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "dense",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "dense",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "dense",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "dense",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "dense",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "dense",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "dense",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "dense",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "dense",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "dense",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "dense",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "dense",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "dense",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "dense",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "dense",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "dense",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "dense",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "dense",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "dense",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "hybrid",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "hybrid",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "hybrid",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "hybrid",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "hybrid",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "hybrid",
+      "allowed_sources": [],
+      "returned_sources": [],
+      "cited_sources": [],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "hybrid",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "hybrid",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "hybrid",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "hybrid",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "hybrid",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "hybrid",
+      "allowed_sources": [
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "hybrid",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "hybrid",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "hybrid",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "hybrid",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "hybrid",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "hybrid",
+      "allowed_sources": [
+        "tutorial_venv"
+      ],
+      "returned_sources": [
+        "tutorial_venv"
+      ],
+      "cited_sources": [
+        "tutorial_venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P01",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P02",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P03",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P04",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P05",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "ensurepip"
+      ],
+      "passed": true
+    },
+    {
+      "query_id": "P06",
+      "method": "hybrid",
+      "allowed_sources": [
+        "venv",
+        "ensurepip"
+      ],
+      "returned_sources": [
+        "ensurepip",
+        "venv"
+      ],
+      "cited_sources": [
+        "venv"
+      ],
+      "passed": true
+    }
+  ],
+  "provenance": [
+    {
+      "source_id": "tutorial_venv",
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.12.8/Doc/tutorial/venv.rst",
+      "retrieved_on": "2026-11-23",
+      "sha256": "f9dac36833979e1e2885ea9bdb1975548b6ff6fca7f57bb3ba6a77810c93d7ac",
+      "license": "Python Software Foundation License"
+    },
+    {
+      "source_id": "venv",
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.12.8/Doc/library/venv.rst",
+      "retrieved_on": "2026-11-23",
+      "sha256": "4b7bd1a665aca29bb883d944bbadf5ffcccfe37cca958184f1d8903a1062bca1",
+      "license": "Python Software Foundation License"
+    },
+    {
+      "source_id": "ensurepip",
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.12.8/Doc/library/ensurepip.rst",
+      "retrieved_on": "2026-11-23",
+      "sha256": "4c1afe0ae2fbb752b98df5a7bd7111514e6e86dbb74fb0ad03b35a94eeb70048",
+      "license": "Python Software Foundation License"
+    }
+  ],
+  "scope_leaks": 0
+}

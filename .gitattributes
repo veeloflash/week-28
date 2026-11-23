@@ -1,0 +1,3 @@
+# Preserve upstream bytes so public-document provenance hashes survive Windows clones.
+Week28_Engineering/data/public_docs/manuals/*.txt -text
+Week28_Engineering/data/public_docs/LICENSE.txt -text

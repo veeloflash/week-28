@@ -282,7 +282,7 @@ class Index:
                                        for i in range(0, len(chunks), 32)])
 
     def search(self, query, *, method="hybrid", rerank=True, expansion="guarded",
-               trusted_only=True, top_n=12, top_k=5):
+               trusted_only=True, top_n=12, top_k=5, allowed_sources=None):
         if not query.strip() or len(query) > 1000 or not 0 < top_k <= top_n:
             raise ValueError("Enter a query of 1 to 1000 characters and use 0 < top-k <= top-N.")
         if method not in {"dense", "sparse", "hybrid"} or expansion not in {"off", "guarded", "broad"}:
@@ -290,7 +290,16 @@ class Index:
         started = perf_counter()
         rewritten, reason = expand(query, expansion)
         forms = [query] if rewritten == query else [query, rewritten]
-        eligible = [i for i, cid in enumerate(self.ids) if self.chunks[cid].trusted or not trusted_only]
+        if allowed_sources is not None:
+            if not isinstance(allowed_sources, (list, set, tuple)) or any(
+                    not isinstance(value, str) for value in allowed_sources):
+                raise ValueError("allowed_sources must be a collection of source IDs.")
+            allowed_sources = sorted(set(allowed_sources))
+            if set(allowed_sources) - {c.source_id for c in self.chunks.values()}:
+                raise ValueError("Unknown source ID in allowed_sources.")
+        eligible = [i for i, cid in enumerate(self.ids)
+                    if (self.chunks[cid].trusted or not trusted_only)
+                    and (allowed_sources is None or self.chunks[cid].source_id in allowed_sources)]
         dense_lists, sparse_lists = [], []
         dense_scores, sparse_scores = {}, {}
         def rank(scores, positive=False):
@@ -337,6 +346,7 @@ class Index:
         return {
             "query": query, "expanded_query": rewritten, "expansion_reason": reason,
             "query_forms": forms, "trusted_only": trusted_only, "method": method,
+            "allowed_sources": allowed_sources,
             "reranker": "controlled relevance scorer" if rerank else "off",
             "embedding_calls": len(dense_lists), "lexical_calls": len(sparse_lists),
             "scored_pairs": len(reranked), "top_n": top_n, "top_k": top_k,
@@ -355,7 +365,10 @@ class Index:
             found = identifiers(chunk.text)
             query_products = {value for value in required if value.startswith("ax-")}
             query_codes = required - query_products
-            if not chunk.trusted or (query_products and not query_products & found):
+            if (not chunk.trusted
+                    or (result.get("allowed_sources") is not None
+                        and chunk.source_id not in result["allowed_sources"])
+                    or (query_products and not query_products & found)):
                 continue
             if query_codes and not query_codes & found:
                 continue

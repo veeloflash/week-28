@@ -1,0 +1,42 @@
+{
+  "audit_command": "python coursework_audits.py --embedding minilm",
+  "embedding": "sentence-transformers/all-MiniLM-L6-v2 (quantized ONNX, 384 dimensions)",
+  "runtime": "3.12.0",
+  "input_sha256": {
+    "chunk_boundary\\manuals\\chunk_boundary_fixture.md": "e36448c4d49b48c1d292772e82825acbad23f07965113d2e61949a03c291d58b",
+    "chunk_boundary\\sources.json": "ab9c3e659d6f2c9e0baf24003f5c89f5684bfcdab1e8a9ed5e9d2b42748bed94",
+    "chunk_boundary_queries.json": "fb721a50521df004d9a0d20f37c74cbcd7e8324236f39653569733fbf3df7457",
+    "conflict_case\\manuals\\manual_v1.md": "2a924e913604d7c5a3ff8cf28a00d14e1e46d46eac222570903a710c1f1d4116",
+    "conflict_case\\manuals\\manual_v2.md": "3237edc50c8c1a8cfc4baa8477c17032f4fa70eddbb99e2228ac86cf0c9a4bf2",
+    "conflict_case\\source_metadata.json": "44b83f83f0a345a30627a576081069106b3fdf38cd10c1204e39cb7d3c7cbcc4",
+    "conflict_case\\sources.json": "3d00e99b7f36f61613c3a2a607791efc6c4e00b2100f3089a63479e28ea395d6",
+    "manuals\\ax17.md": "c594049646f4b42a41747939bf30fe55a05a183d8ac61c4a9d22f7251e0dbe3a",
+    "manuals\\ax18.md": "a13a5751178cbefb4190714110f70edbe51f561ae09708cee1bb0680652f097b",
+    "manuals\\forum.md": "5ab62fd9af8d8c4d00e3811a1ff11f06cc481b7fe5844e3b7409e56b0df306fe",
+    "manuals\\policy.md": "93277c7a124971e0c77f943e687c6940d889b2a8d202c1d6bb682612390eb35f",
+    "public_docs\\LICENSE.txt": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf",
+    "public_docs\\manuals\\ensurepip.txt": "4c1afe0ae2fbb752b98df5a7bd7111514e6e86dbb74fb0ad03b35a94eeb70048",
+    "public_docs\\manuals\\tutorial_venv.txt": "f9dac36833979e1e2885ea9bdb1975548b6ff6fca7f57bb3ba6a77810c93d7ac",
+    "public_docs\\manuals\\venv.txt": "4b7bd1a665aca29bb883d944bbadf5ffcccfe37cca958184f1d8903a1062bca1",
+    "public_docs\\provenance.json": "2d019a413a811b00eabce9613ea67cbb21aa63290d9fad74bb18aec0805ba4b0",
+    "public_docs\\queries.json": "84100eb7116aa6f7bc5ff8f355d6e3b09335410d80f4a23e472bf79a195b039a",
+    "public_docs\\sources.json": "5afa1b1320b591fd81a5af60c4b107ac1899e7f59690abb6c70422897ad99956",
+    "queries.json": "4962954214f60b932e3ddedc9f72190af2c76fb3b9d94e0da2c19f5738146b8a",
+    "sources.json": "021d49f4a3d39b5b5478f48598fdf5dc6aa9e4f8447a85a30e1913a78d552e90",
+    "stress_protocol.md": "896021d3818c00725e932b44651fe96fc2ddf9ac1acb0cdf19bee2e16af69f13",
+    "stress_queries.json": "ad35192d4657cabdfe30965c927448d082de84e0de6f2b06ed24c43c14abae8c"
+  },
+  "reranker_improved_cases": 10,
+  "reranker_degraded_cases": 5,
+  "reranker_human_review_complete": false,
+  "agent_case_inspection_complete": true,
+  "boundary_question_count": 12,
+  "overlap_values": [
+    0,
+    8,
+    16,
+    24
+  ],
+  "public_corpus_validated": true,
+  "commissioned_client_acceptance": false
+}

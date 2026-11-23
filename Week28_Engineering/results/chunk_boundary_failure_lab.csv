@@ -1,0 +1,61 @@
+config,query_id,category,query,recall_at_5,mrr_at_5,error,chunk_count,context_tokens,fully_supporting_chunks
+fixed32_overlap0,CB01,heading_paragraph,What does the amber indicator mean?,1.0,1.0,ok,8,138,1
+fixed32_overlap0,CB02,table_header_row,What is the AX-17 upload limit in the table?,1.0,0,ok,8,138,0
+fixed32_overlap0,CB03,code_explanation,What does send_logs() do and what should I do with the archive?,1.0,1.0,ok,8,138,1
+fixed32_overlap0,CB04,multi_fact_boundary,Compare the Power-button timing for recovery on firmware 2.1 and 2.2.,1.0,0,ok,8,138,0
+fixed32_overlap0,CB05,long_section,What should I do if the screen remains blank after the update restart?,1.0,1.0,ok,8,138,1
+fixed32_overlap0,CB06,overlap_rescue,What does AX-17-ZEBRA-731 mean?,1.0,0,ok,8,138,0
+fixed32_overlap0,CB07,section_aware_rescue,What does a pulsing green indicator mean on AX-18?,1.0,0,ok,8,138,0
+fixed32_overlap0,CB08,heading_paragraph,Which charger and preparation are required before recovery?,1.0,0,ok,8,138,0
+fixed32_overlap0,CB09,table_header_row,Which product has a 20 MB individual upload cap?,1.0,0,ok,8,138,0
+fixed32_overlap0,CB10,code_explanation,Where should I save the diagnostic log export?,1.0,1.0,ok,8,160,1
+fixed32_overlap0,CB11,multi_fact_boundary,When can I disconnect the update cable?,1.0,1.0,ok,8,160,1
+fixed32_overlap0,CB12,long_section,What should I do with archived logs when the recovery cache is full?,1.0,1.0,ok,8,160,1
+fixed32_overlap8,CB01,heading_paragraph,What does the amber indicator mean?,1.0,1.0,ok,10,146,1
+fixed32_overlap8,CB02,table_header_row,What is the AX-17 upload limit in the table?,1.0,1.0,ok,10,146,1
+fixed32_overlap8,CB03,code_explanation,What does send_logs() do and what should I do with the archive?,1.0,0,ok,10,160,0
+fixed32_overlap8,CB04,multi_fact_boundary,Compare the Power-button timing for recovery on firmware 2.1 and 2.2.,1.0,0,ok,10,160,0
+fixed32_overlap8,CB05,long_section,What should I do if the screen remains blank after the update restart?,1.0,1.0,ok,10,160,1
+fixed32_overlap8,CB06,overlap_rescue,What does AX-17-ZEBRA-731 mean?,1.0,0,ok,10,146,0
+fixed32_overlap8,CB07,section_aware_rescue,What does a pulsing green indicator mean on AX-18?,1.0,1.0,ok,10,146,1
+fixed32_overlap8,CB08,heading_paragraph,Which charger and preparation are required before recovery?,1.0,0,ok,10,146,0
+fixed32_overlap8,CB09,table_header_row,Which product has a 20 MB individual upload cap?,1.0,1.0,ok,10,160,1
+fixed32_overlap8,CB10,code_explanation,Where should I save the diagnostic log export?,1.0,0,ok,10,160,0
+fixed32_overlap8,CB11,multi_fact_boundary,When can I disconnect the update cable?,1.0,1.0,ok,10,160,1
+fixed32_overlap8,CB12,long_section,What should I do with archived logs when the recovery cache is full?,1.0,1.0,ok,10,160,1
+fixed32_overlap16,CB01,heading_paragraph,What does the amber indicator mean?,1.0,0.5,ok,14,154,1
+fixed32_overlap16,CB02,table_header_row,What is the AX-17 upload limit in the table?,1.0,0.5,ok,14,160,1
+fixed32_overlap16,CB03,code_explanation,What does send_logs() do and what should I do with the archive?,1.0,1.0,ok,14,160,1
+fixed32_overlap16,CB04,multi_fact_boundary,Compare the Power-button timing for recovery on firmware 2.1 and 2.2.,1.0,0,ok,14,160,0
+fixed32_overlap16,CB05,long_section,What should I do if the screen remains blank after the update restart?,1.0,1.0,ok,14,160,1
+fixed32_overlap16,CB06,overlap_rescue,What does AX-17-ZEBRA-731 mean?,1.0,0.3333333333333333,ok,14,154,1
+fixed32_overlap16,CB07,section_aware_rescue,What does a pulsing green indicator mean on AX-18?,1.0,1.0,ok,14,154,1
+fixed32_overlap16,CB08,heading_paragraph,Which charger and preparation are required before recovery?,1.0,1.0,ok,14,154,1
+fixed32_overlap16,CB09,table_header_row,Which product has a 20 MB individual upload cap?,1.0,0.5,ok,14,160,1
+fixed32_overlap16,CB10,code_explanation,Where should I save the diagnostic log export?,1.0,1.0,ok,14,160,1
+fixed32_overlap16,CB11,multi_fact_boundary,When can I disconnect the update cable?,1.0,1.0,ok,14,160,2
+fixed32_overlap16,CB12,long_section,What should I do with archived logs when the recovery cache is full?,1.0,1.0,ok,14,160,2
+fixed32_overlap24,CB01,heading_paragraph,What does the amber indicator mean?,1.0,0.3333333333333333,ok,27,154,1
+fixed32_overlap24,CB02,table_header_row,What is the AX-17 upload limit in the table?,1.0,1.0,ok,27,160,3
+fixed32_overlap24,CB03,code_explanation,What does send_logs() do and what should I do with the archive?,1.0,0.5,ok,27,160,2
+fixed32_overlap24,CB04,multi_fact_boundary,Compare the Power-button timing for recovery on firmware 2.1 and 2.2.,1.0,0.5,ok,27,160,1
+fixed32_overlap24,CB05,long_section,What should I do if the screen remains blank after the update restart?,1.0,1.0,ok,27,160,3
+fixed32_overlap24,CB06,overlap_rescue,What does AX-17-ZEBRA-731 mean?,1.0,0.2,ok,27,154,2
+fixed32_overlap24,CB07,section_aware_rescue,What does a pulsing green indicator mean on AX-18?,1.0,1.0,ok,27,154,1
+fixed32_overlap24,CB08,heading_paragraph,Which charger and preparation are required before recovery?,1.0,1.0,ok,27,160,2
+fixed32_overlap24,CB09,table_header_row,Which product has a 20 MB individual upload cap?,1.0,0.5,ok,27,160,3
+fixed32_overlap24,CB10,code_explanation,Where should I save the diagnostic log export?,1.0,1.0,ok,27,160,2
+fixed32_overlap24,CB11,multi_fact_boundary,When can I disconnect the update cable?,1.0,1.0,ok,27,160,3
+fixed32_overlap24,CB12,long_section,What should I do with archived logs when the recovery cache is full?,1.0,1.0,ok,27,160,3
+sections,CB01,heading_paragraph,What does the amber indicator mean?,1.0,1.0,ok,10,109,1
+sections,CB02,table_header_row,What is the AX-17 upload limit in the table?,1.0,1.0,ok,10,112,1
+sections,CB03,code_explanation,What does send_logs() do and what should I do with the archive?,1.0,1.0,ok,10,112,1
+sections,CB04,multi_fact_boundary,Compare the Power-button timing for recovery on firmware 2.1 and 2.2.,1.0,1.0,ok,10,160,1
+sections,CB05,long_section,What should I do if the screen remains blank after the update restart?,1.0,0,ok,10,166,0
+sections,CB06,overlap_rescue,What does AX-17-ZEBRA-731 mean?,1.0,1.0,ok,10,102,1
+sections,CB07,section_aware_rescue,What does a pulsing green indicator mean on AX-18?,1.0,1.0,ok,10,160,1
+sections,CB08,heading_paragraph,Which charger and preparation are required before recovery?,1.0,1.0,ok,10,160,1
+sections,CB09,table_header_row,Which product has a 20 MB individual upload cap?,1.0,1.0,ok,10,91,1
+sections,CB10,code_explanation,Where should I save the diagnostic log export?,1.0,1.0,ok,10,166,1
+sections,CB11,multi_fact_boundary,When can I disconnect the update cable?,1.0,1.0,ok,10,165,1
+sections,CB12,long_section,What should I do with archived logs when the recovery cache is full?,1.0,1.0,ok,10,166,1
